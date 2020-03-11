@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Exemple Get sans paramètres</h2>
+<button id="bt_page1" onclick="Affiche_Page1()"> afficher page 1</button>
+<div id="page1">
+    Contenue de la page 1
+</div>
+
+<h2>Exemple get avec paramètres</h2>
+<input type="text" id="x_value" />
+<input type="text" id="y_value" />
+<button id="bt_somme" onclick="Somme()">Somme</button>
+<div id="result"></div>
+
+@section scripts{
+   <script>
+       $(function () {
+           alert("JQuery");
+       });
+
+       function Affiche_Page1() {
+           $.get("/Home/Page1", function (data) {
+               alert(data);
+               $("#page1").html(data);
+           });
+       }
+       function Somme() {
+           var x = $("#x_value").val();
+           var y = $("#y_value").val();
+           $.get("/Home/Somme", { "x": x, "y": y }, function (data) {
+               $("#result").html(data);
+           });
+               
+       
+       }
+    </script>
+}
